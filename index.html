@@ -27,19 +27,13 @@
             </svg>
             <span>Create new note</span>
           </button>
-          <div class="notes-list">
-            <div class="note-entry">
-              <div class="note-title">asdf</div>
-              <div class="note-content-teaser">asdf</div>
-              <div class="note-date">16.02.2026, 16;05</div>
-            </div>
-          </div>
+          <div class="notes-list"></div>
         </div>
         <!-- Ab hier rechte Seite -->
         <div class="main-content">
           <div class="title-and-save">
             <input type="text" id="title-input" placeholder="enter heading" />
-            <button class="save-note" onclick="">
+            <button class="save-note" onclick="saveNote()">
               <svg
                 class="icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +73,7 @@
         </div>
       </section>
     </main>
+    <script src="notesAPI.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

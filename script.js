@@ -1,45 +1,11 @@
 const notesListEl = document.querySelector(".notes-list");
 
-const MOCK_NOTES = [
-  {
-    id: "1",
-    title: "Notiz 1",
-    content: "Lorem Ipsum dolor sit amet",
-    lastUpdated: 1771588590158,
-  },
-  {
-    id: "2",
-    title: "Notiz 2",
-    content: "Lorem Ipsum dolor sit amet",
-    lastUpdated: 1771588610258,
-  },
-  {
-    id: "3",
-    title: "Notiz 3",
-    content: "Lorem Ipsum dolor sit amet",
-    lastUpdated: 1771588620358,
-  },
-  {
-    id: "4",
-    title: "Notiz 4",
-    content: "Lorem Ipsum dolor sit amet",
-    lastUpdated: 1771588630458,
-  },
-  {
-    id: "5",
-    title: "Notiz 5",
-    content: "Lorem Ipsum dolor sit amet",
-    lastUpdated: 1771588690558,
-  },
-];
-
 function displayNotesList() {
   const notes = MOCK_NOTES;
 
   const sortedNotes = [...notes].sort(
     (noteA, noteB) => noteB.lastUpdated - noteA.lastUpdated,
   );
-  console.log(notes);
   let html = "";
 
   sortedNotes.forEach((note) => {
@@ -55,4 +21,26 @@ function displayNotesList() {
   notesListEl.innerHTML = html;
 }
 
-displayNotesList();
+function saveNote() {
+  createNote();
+}
+
+function createNote() {
+  const newNote = {
+    id: "",
+    title: "",
+    content: "",
+    lastUpdated: new Date(),
+  };
+  const titleInput = document.getElementById("title-input");
+
+  const contentInput = document.getElementById("content-input");
+  if (titleInput.value.trim() !== "" && contentInput.value.trim() !== "") {
+    newNote.title = titleInput.value;
+    newNote.content = contentInput.value;
+    MOCK_NOTES.push(newNote);
+    displayNotesList();
+  } else {
+    alert("Bitte Titel und Inhalt eingeben");
+  }
+}
