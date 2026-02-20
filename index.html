@@ -38,8 +38,8 @@
         <!-- Ab hier rechte Seite -->
         <div class="main-content">
           <div class="title-and-save">
-            <input type="text" class="input-title" />
-            <button class="save-note">
+            <input type="text" id="title-input" placeholder="enter heading" />
+            <button class="save-note" onclick="">
               <svg
                 class="icon"
                 xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,10 @@
               </svg>
             </button>
           </div>
-          <textarea id="content-input">Start making a Note </textarea>
+          <textarea
+            id="content-input"
+            placeholder="Start making a note"
+          ></textarea>
         </div>
       </section>
     </main>
