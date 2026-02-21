@@ -1,4 +1,9 @@
 const notesListEl = document.querySelector(".notes-list");
+const saveBtnEl = document.querySelector(".save-note");
+const titleInputEl = document.getElementById("title-input");
+const contentInputEl = document.getElementById("content-input");
+
+saveBtnEl.addEventListener("click", clickSaveButton);
 
 function displayNotesList() {
   const notes = MOCK_NOTES;
@@ -21,11 +26,7 @@ function displayNotesList() {
   notesListEl.innerHTML = html;
 }
 
-function saveNote() {
-  createNote();
-}
-
-function createNote() {
+function clickSaveButton() {
   const newNote = {
     id: "",
     title: "",
@@ -33,9 +34,11 @@ function createNote() {
     lastUpdated: new Date(),
   };
   const titleInput = document.getElementById("title-input");
-
   const contentInput = document.getElementById("content-input");
-  if (titleInput.value.trim() !== "" && contentInput.value.trim() !== "") {
+
+  const title = titleInput.value.trim();
+  const content = contentInput.value.trim();
+  if (title !== "" && content !== "") {
     newNote.title = titleInput.value;
     newNote.content = contentInput.value;
     MOCK_NOTES.push(newNote);

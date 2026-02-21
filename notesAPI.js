@@ -1,3 +1,5 @@
+const LOCAL_STORAGE_KEY = "noteapp-notice";
+
 const MOCK_NOTES = [
   {
     id: "1",

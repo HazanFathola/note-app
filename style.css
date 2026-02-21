@@ -5,12 +5,15 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 html {
   font-size: 62.5%;
 }
+
 body {
   font-size: 1.6rem;
 }
+
 :root {
   --border-radius: 0.5rem;
   --font-family: "Poppins", sans-serif;
@@ -18,16 +21,19 @@ body {
   --primary-color-rgb: rgb(var(--primary-color));
   --primary-color--hover: rgb(249, 126, 237);
 }
+
 .icon {
   height: 3.2rem;
   width: 3.2rem;
 }
+
 .notes-app {
   display: flex;
   width: 100%;
   height: 100dvh;
   font-family: var(--font-family);
 }
+
 /* ab hier alles zur Sidebar */
 .sidebar {
   width: 45rem;
@@ -35,6 +41,7 @@ body {
   border-right: solid 1px #111;
   overflow: auto;
 }
+
 .create-new {
   display: flex;
   justify-content: center;
@@ -42,10 +49,12 @@ body {
   text-align: center;
   gap: 0.8rem;
 }
+
 .create-new .icon {
   width: 2.4rem;
   height: 2.4rem;
 }
+
 .create-new,
 .save-note,
 .delete-note {
@@ -60,26 +69,31 @@ body {
   cursor: pointer;
   transition: all 0.2 ease;
 }
+
 .create-new:hover,
 .save-note:hover,
 .delete-note:hover {
   background-color: var(--primary-color--hover);
 }
+
 .notes-list {
   display: flex;
   flex-direction: column;
   margin-top: 2.4rem;
   gap: 1.6rem;
 }
+
 .note-entry {
   padding: 1.6rem;
   box-shadow: 0px 0px 5px 4px rgba(0, 0, 0, 0.1);
   border-radius: var(--border-radius);
   transition: all 0.2s ease-in-out;
 }
+
 .note-entry:not(.selected-note) {
   cursor: pointer;
 }
+
 .note-entry:hover,
 .selected-note {
   background-color: rgba(var(--primary-color), 0.1);
@@ -90,6 +104,7 @@ body {
   font-size: 2.4rem;
   font-weight: 500;
 }
+
 .note-title,
 .note-content-teaser {
   width: 100%;
@@ -97,9 +112,11 @@ body {
   white-space: nowrap;
   overflow: hidden;
 }
+
 .note-content-teaser {
   color: gray;
 }
+
 .note-date {
   margin-top: 1.6rem;
   width: 100%;
@@ -108,11 +125,13 @@ body {
   font-size: 1.2rem;
   color: gray;
 }
+
 /* Ab hier alles zur main-content */
 .main-content {
   width: 100%;
   padding: 2.4rem 1.6rem;
 }
+
 .title-and-save {
   display: flex;
   margin-bottom: 2.4rem;
@@ -122,21 +141,25 @@ body {
   font-size: 4.8rem;
   font-weight: 700;
 }
+
 #content-input {
   font-size: 2.4rem;
   resize: none;
   height: 80dvh;
 }
+
 #title-input,
 #content-input {
   width: 100%;
   border: none;
   outline: none;
 }
+
 #title-input::placeholder,
 #content-input::placeholder {
   color: gray;
 }
+
 .save-note,
 .delete-note {
   padding: 1.6rem;
