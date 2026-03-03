@@ -57,10 +57,6 @@ function clickSaveButton() {
 }
 
 function selectNote(id) {
-  const titleInput = document.getElementById("title-input");
-
-  const contentInput = document.getElementById("content-input");
-
   const selectedNoteEl = document.querySelector(`.note-entry[data-id="${id}"]`);
 
   if (selectedNoteEl.classList.contains("selected-note")) return;
@@ -72,9 +68,12 @@ function selectNote(id) {
 
   selectedNoteEl.classList.add("selected-note");
 
-  const noteTitle = selectedNoteEl.querySelector(".note-title");
-  titleInput.value = noteTitle.textContent;
+  const notes = getNotes();
 
-  const noteContent = selectedNoteEl.querySelector(".note-content-teaser");
-  contentInput.value = noteContent.textContent;
+  const selectedNote = notes.find((note) => note.id === Number(id));
+
+  if (!selectNote) return;
+
+  titleInputEl.value = selectedNote.title;
+  contentInputEl.value = selectedNote.content;
 }
