@@ -45,15 +45,22 @@ function clickSaveButton() {
   const content = contentInput.value.trim();
   if (!title || !content) {
     alert("Bitte Titel und Inhalt eingeben");
-  } else {
-    saveNote(title, content);
-
-    titleInput.value = "";
-    contentInput.value = "";
-
-    displayNotesList();
-    applyListeners();
   }
+  let currrentId = undefined;
+
+  const currentlySelectedNoteEl = document.querySelector(".selected-note");
+
+  if (currentlySelectedNoteEl) {
+    currrentId = currentlySelectedNoteEl.getAttribute("data-id");
+  }
+
+  saveNote(title, content, Number(currrentId));
+
+  titleInput.value = "";
+  contentInput.value = "";
+
+  displayNotesList();
+  applyListeners();
 }
 
 function selectNote(id) {
@@ -72,7 +79,7 @@ function selectNote(id) {
 
   const selectedNote = notes.find((note) => note.id === Number(id));
 
-  if (!selectNote) return;
+  if (!selectedNote) return;
 
   titleInputEl.value = selectedNote.title;
   contentInputEl.value = selectedNote.content;
