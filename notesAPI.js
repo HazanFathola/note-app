@@ -28,7 +28,6 @@ function saveNote(newTitle, newContent, id = undefined) {
   }
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
-  console.log(notes);
 }
 
 function genNextId() {

@@ -1,9 +1,11 @@
 const notesListEl = document.querySelector(".notes-list");
 const saveBtnEl = document.querySelector(".save-note");
+const createNewNoteBtnEl = document.querySelector(".create-new");
 const titleInputEl = document.getElementById("title-input");
 const contentInputEl = document.getElementById("content-input");
 
 saveBtnEl.addEventListener("click", clickSaveButton);
+createNewNoteBtnEl.addEventListener("click", newNote);
 
 displayNotesList();
 applyListeners();
@@ -68,10 +70,7 @@ function selectNote(id) {
 
   if (selectedNoteEl.classList.contains("selected-note")) return;
 
-  const noteEntriesEls = document.querySelectorAll(".note-entry");
-  noteEntriesEls.forEach((noteEntry) => {
-    noteEntry.classList.remove("selected-note");
-  });
+  removeSelectedClassFromNote();
 
   selectedNoteEl.classList.add("selected-note");
 
@@ -83,4 +82,18 @@ function selectNote(id) {
 
   titleInputEl.value = selectedNote.title;
   contentInputEl.value = selectedNote.content;
+}
+
+function newNote() {
+  titleInputEl.value = "";
+  contentInputEl.value = "";
+
+  removeSelectedClassFromNote();
+}
+
+function removeSelectedClassFromNote() {
+  const noteEntriesEls = document.querySelectorAll(".note-entry");
+  noteEntriesEls.forEach((noteEntry) => {
+    noteEntry.classList.remove("selected-note");
+  });
 }
