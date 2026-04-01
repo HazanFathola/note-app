@@ -7,7 +7,7 @@ const deleteNoteBtnEl = document.querySelector(".delete-note");
 
 saveBtnEl.addEventListener("click", clickSaveButton);
 createNewNoteBtnEl.addEventListener("click", newNote);
-deleteNoteBtnEl.addEventListener("click", deleteSelectedNote);
+deleteNoteBtnEl.addEventListener("click", deleteNoteBtn);
 
 displayNotesList();
 applyListeners();
@@ -41,25 +41,23 @@ function displayNotesList() {
   });
   notesListEl.innerHTML = html;
 }
-function clickSaveButton() {
-  const titleInput = document.getElementById("title-input");
-  const contentInput = document.getElementById("content-input");
+function getCurrentId() {
+  const selectedNoteEl = document.querySelector(".selected-note");
+  if (!selectedNoteEl) return null;
 
-  const title = titleInput.value.trim();
-  const content = contentInput.value.trim();
+  return Number(selectedNoteEl.getAttribute("data-id"));
+}
+function clickSaveButton() {
+  const title = titleInputEl.value.trim();
+  const content = contentInputEl.value.trim();
   if (!title || !content) {
     alert("Bitte Titel und Inhalt eingeben");
     return;
   }
-  let currentId = undefined;
 
-  const currentlySelectedNoteEl = document.querySelector(".selected-note");
+  const currentId = getCurrentId();
 
-  if (currentlySelectedNoteEl) {
-    currentId = currentlySelectedNoteEl.getAttribute("data-id");
-  }
-
-  saveNote(title, content, Number(currentId));
+  saveNote(title, content, currentId);
 
   titleInput.value = "";
   contentInput.value = "";
@@ -101,15 +99,11 @@ function removeSelectedClassFromNote() {
   });
 }
 
-function deleteSelectedNote() {
-  const notes = getNotes();
-  const selectedNote = document.querySelector(".selected-note");
-  if (!selectedNote) return;
-  const currentId = Number(selectedNote.dataset.id);
-  const newNotes = notes.filter((note) => note.id !== currentId);
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newNotes));
-
+function deleteNoteBtnEl() {
+  const currentId = getCurrentId();
+  deleteNote(currentId);
   titleInputEl.value = "";
   contentInputEl.value = "";
   displayNotesList();
+  applyListeners();
 }

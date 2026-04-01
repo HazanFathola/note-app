@@ -45,3 +45,9 @@ function genNextId() {
 
   return nextId;
 }
+function deleteNote(id) {
+  if (!id) return;
+  const notes = getNotes();
+  const newNotes = notes.filter((note) => note.id !== id);
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newNotes));
+}
