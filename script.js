@@ -3,9 +3,11 @@ const saveBtnEl = document.querySelector(".save-note");
 const createNewNoteBtnEl = document.querySelector(".create-new");
 const titleInputEl = document.getElementById("title-input");
 const contentInputEl = document.getElementById("content-input");
+const deleteNoteBtnEl = document.querySelector(".delete-note");
 
 saveBtnEl.addEventListener("click", clickSaveButton);
 createNewNoteBtnEl.addEventListener("click", newNote);
+deleteNoteBtnEl.addEventListener("click", deleteSelectedNote);
 
 displayNotesList();
 applyListeners();
@@ -47,16 +49,17 @@ function clickSaveButton() {
   const content = contentInput.value.trim();
   if (!title || !content) {
     alert("Bitte Titel und Inhalt eingeben");
+    return;
   }
-  let currrentId = undefined;
+  let currentId = undefined;
 
   const currentlySelectedNoteEl = document.querySelector(".selected-note");
 
   if (currentlySelectedNoteEl) {
-    currrentId = currentlySelectedNoteEl.getAttribute("data-id");
+    currentId = currentlySelectedNoteEl.getAttribute("data-id");
   }
 
-  saveNote(title, content, Number(currrentId));
+  saveNote(title, content, Number(currentId));
 
   titleInput.value = "";
   contentInput.value = "";
@@ -96,4 +99,17 @@ function removeSelectedClassFromNote() {
   noteEntriesEls.forEach((noteEntry) => {
     noteEntry.classList.remove("selected-note");
   });
+}
+
+function deleteSelectedNote() {
+  const notes = getNotes();
+  const selectedNote = document.querySelector(".selected-note");
+  if (!selectedNote) return;
+  const currentId = Number(selectedNote.dataset.id);
+  const newNotes = notes.filter((note) => note.id !== currentId);
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newNotes));
+
+  titleInputEl.value = "";
+  contentInputEl.value = "";
+  displayNotesList();
 }
