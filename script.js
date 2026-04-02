@@ -33,13 +33,22 @@ function displayNotesList() {
   sortedNotes.forEach((note) => {
     html += `
             <div class="note-entry" data-id="${note.id}">
-              <div class="note-title">${note.title}</div>
-              <div class="note-content-teaser">${note.content}</div>
+              <div class="note-title">${escapeHTML(note.title)}</div>
+              <div class="note-content-teaser">${escapeHTML(note.content)}</div>
               <div class="note-date">${new Date(note.lastUpdated).toLocaleString("de-DE")}</div>
             </div>
             `;
   });
+  console.log(typeof html);
   notesListEl.innerHTML = html;
+}
+function escapeHTML(str) {
+  return str
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 function getCurrentId() {
   const selectedNoteEl = document.querySelector(".selected-note");
@@ -54,13 +63,13 @@ function clickSaveButton() {
     alert("Bitte Titel und Inhalt eingeben");
     return;
   }
-
+  console.log(typeof titleInputEl.value);
   const currentId = getCurrentId();
 
   saveNote(title, content, currentId);
 
-  titleInput.value = "";
-  contentInput.value = "";
+  titleInputEl.value = "";
+  contentInputEl.value = "";
 
   displayNotesList();
   applyListeners();
@@ -99,7 +108,7 @@ function removeSelectedClassFromNote() {
   });
 }
 
-function deleteNoteBtnEl() {
+function deleteNoteBtn() {
   const currentId = getCurrentId();
   deleteNote(currentId);
   titleInputEl.value = "";
